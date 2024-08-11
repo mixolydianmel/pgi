@@ -6,8 +6,8 @@
   outputs =
     { self, nixpkgs }:
     let
-      pkgs = nixpkgs.${system}.legacyPackages;
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       devShells.${system}.default = pkgs.mkShell {
