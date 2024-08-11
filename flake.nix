@@ -24,10 +24,21 @@
         buildInputs = with pkgs; [
           pkg-config
           alsa-lib
+          wayland
+          udev
+          libxkbcommon
+          vulkan-loader
 
           cargo
           rustc
         ];
+
+        LD_LIBRARY_PATH =
+          with pkgs;
+          lib.makeLibraryPath [
+            libxkbcommon
+            vulkan-loader
+          ];
       };
     };
 }
