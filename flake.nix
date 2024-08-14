@@ -17,6 +17,7 @@
           typst-fmt
           typst-lsp
 
+          bacon
           clippy
           rustfmt
           rust-analyzer
