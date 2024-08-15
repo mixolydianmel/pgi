@@ -1,9 +1,19 @@
 use bevy::prelude::*;
-use pgi_display::{rendering::setup_camera, structures::setup_shapes};
+use pgi_display::{
+    rendering::{setup_camera, setup_windows},
+    structures::{generate_meshes, load_structures, LoadedStructures},
+};
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_systems(Startup, (setup_camera, setup_shapes))
+        .insert_resource(LoadedStructures::default())
+        .add_systems(
+            Startup,
+            (
+                (setup_windows, setup_camera).chain(),
+                (load_structures, generate_meshes).chain(),
+            ),
+        )
         .run();
 }

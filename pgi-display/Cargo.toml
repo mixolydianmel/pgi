@@ -5,3 +5,8 @@ edition = "2021"
 
 [dependencies]
 bevy = { version = "0.14.0", features = ["wayland"] }
+nokhwa = "0.10.4"
+
+[patch.crates-io]
+# patch nokhwa core until https://github.com/l1npengtul/nokhwa/pull/178 is merged and released
+nokhwa-core = { git = "https://github.com/l1npengtul/nokhwa.git", rev = "74a98ace10368320cfcc2186118ae10d5308ca59"}
