@@ -16,6 +16,15 @@ pub struct StructureDescriptor {
 #[derive(Resource, Default)]
 pub struct LoadedStructures(Vec<StructureDescriptor>);
 
+pub struct PgiStructuresPlugin;
+
+impl Plugin for PgiStructuresPlugin {
+    fn build(&self, app: &mut App) {
+        app.insert_resource(LoadedStructures::default())
+            .add_systems(Startup, (load_structures, generate_meshes).chain());
+    }
+}
+
 pub fn load_structures(
     mut loaded_structures: ResMut<LoadedStructures>,
     mut meshes: ResMut<Assets<Mesh>>,

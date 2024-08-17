@@ -2,11 +2,15 @@
 name = "pgi-display"
 version = "0.1.0"
 edition = "2021"
+description = "A Physicalized Game Interface Display"
 
 [dependencies]
 bevy = { version = "0.14.0", features = ["wayland"] }
-nokhwa = "0.10.4"
+clap = { version = "4.5.15", features = ["derive"] }
+nokhwa = { version = "0.10.4", features = ["input-native", "output-threaded"] }
 
 [patch.crates-io]
 # patch nokhwa core until https://github.com/l1npengtul/nokhwa/pull/178 is merged and released
 nokhwa-core = { git = "https://github.com/l1npengtul/nokhwa.git", rev = "74a98ace10368320cfcc2186118ae10d5308ca59"}
+# patch nokhwa linux bindings until new release fixes https://github.com/l1npengtul/nokhwa/issues/147
+nokhwa-bindings-linux = { git = "https://github.com/l1npengtul/nokhwa.git", rev = "74a98ace10368320cfcc2186118ae10d5308ca59"}

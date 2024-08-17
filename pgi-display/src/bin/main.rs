@@ -1,19 +1,17 @@
 use bevy::prelude::*;
 use pgi_display::{
-    rendering::{setup_camera, setup_windows},
-    structures::{generate_meshes, load_structures, LoadedStructures},
+    input::PgiInputPlugin, rendering::PgiRenderingPlugin, structures::PgiStructuresPlugin,
+    webcam::PgiWebcamPlugin,
 };
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
-        .insert_resource(LoadedStructures::default())
-        .add_systems(
-            Startup,
-            (
-                (setup_windows, setup_camera).chain(),
-                (load_structures, generate_meshes).chain(),
-            ),
-        )
+        .add_plugins((
+            DefaultPlugins,
+            PgiInputPlugin,
+            PgiRenderingPlugin,
+            PgiWebcamPlugin,
+            PgiStructuresPlugin,
+        ))
         .run();
 }
