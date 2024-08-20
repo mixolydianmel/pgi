@@ -43,9 +43,28 @@ pub fn load_structures(
         index: 0,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Circle { radius: 50.0 })),
-        color: materials.add(Color::linear_rgb(0.9, 0.2, 0.2)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 400.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.1, 0.1)),
         index: 1,
+    });
+    loaded_structures.0.push(StructureDescriptor {
+        mesh: Mesh2dHandle(meshes.add(Annulus::new(200.0, 400.0))),
+        color: materials.add(Color::linear_rgb(0.1, 0.1, 0.9)),
+        index: 2,
+    });
+    loaded_structures.0.push(StructureDescriptor {
+        mesh: Mesh2dHandle(meshes.add(Triangle2d::new(
+            Vec2::new(-400.0, -400.0),
+            Vec2::new(400.0, -400.0),
+            Vec2::new(0.0, 400.0),
+        ))),
+        color: materials.add(Color::linear_rgb(0.9, 0.1, 0.9)),
+        index: 3,
+    });
+    loaded_structures.0.push(StructureDescriptor {
+        mesh: Mesh2dHandle(meshes.add(Capsule2d::new(200.0, 400.0))),
+        color: materials.add(Color::linear_rgb(0.1, 0.9, 0.9)),
+        index: 4,
     });
 }
 
@@ -55,7 +74,8 @@ pub fn generate_meshes(mut commands: Commands, loaded_structures: Res<LoadedStru
             MaterialMesh2dBundle {
                 mesh: structure.mesh.clone(),
                 material: structure.color.clone(),
-                transform: Transform::from_xyz(0.0, 0.0, 100.0 + structure.index as f32),
+                transform: Transform::from_xyz(0.0, 0.0, 0.0),
+                visibility: Visibility::Hidden,
                 ..default()
             },
             Structure {
