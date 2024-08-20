@@ -8,11 +8,6 @@ use bevy::{
 
 use crate::apriltag::TagDetectionList;
 
-#[derive(Component)]
-pub struct Structure {
-    index: usize,
-}
-
 pub struct StructureDescriptor {
     mesh: Mesh2dHandle,
     color: Handle<ColorMaterial>,
@@ -38,32 +33,28 @@ pub fn load_structures(
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Rectangle::new(100.0, 100.0))),
-        color: materials.add(Color::linear_rgb(0.1, 0.9, 0.1)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 10.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.9, 0.9)),
         index: 0,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Circle { radius: 400.0 })),
-        color: materials.add(Color::linear_rgb(0.9, 0.1, 0.1)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 20.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.9, 0.9)),
         index: 1,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(bevy::math::primitives::Annulus::new(200.0, 400.0))),
-        color: materials.add(Color::linear_rgb(0.1, 0.1, 0.9)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 30.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.9, 0.9)),
         index: 2,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(bevy::math::primitives::Triangle2d::new(
-            Vec2::new(-400.0, -200.0),
-            Vec2::new(400.0, -200.0),
-            Vec2::new(0.0, 200.0),
-        ))),
-        color: materials.add(Color::linear_rgb(0.9, 0.1, 0.9)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 50.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.9, 0.9)),
         index: 3,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(bevy::math::primitives::Capsule2d::new(200.0, 400.0))),
-        color: materials.add(Color::linear_rgb(0.1, 0.9, 0.9)),
+        mesh: Mesh2dHandle(meshes.add(Circle { radius: 80.0 })),
+        color: materials.add(Color::linear_rgb(0.9, 0.9, 0.9)),
         index: 4,
     });
 }

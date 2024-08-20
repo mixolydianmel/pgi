@@ -10,6 +10,6 @@ impl Plugin for PgiInputPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(WebcamIndex(0))
             .add_systems(Startup, launch::parse_args)
-            .add_systems(Update, runtime::exit_on_esc);
+            .add_systems(Update, (runtime::exit_on_esc, runtime::clear_on_space));
     }
 }
