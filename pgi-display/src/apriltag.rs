@@ -45,7 +45,7 @@ pub fn update_detections(
         .into_iter()
         .filter(|det| det.decision_margin() > 33.0)
         .for_each(|det| {
-            info!(
+            debug!(
                 "Detected tag ID {} with {} certainty",
                 det.id(),
                 det.decision_margin()
