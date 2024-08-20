@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use pgi_display::{
-    input::PgiInputPlugin, rendering::PgiRenderingPlugin, structures::PgiStructuresPlugin,
-    webcam::PgiWebcamPlugin,
+    apriltag::PgiAprilTagPlugin, input::PgiInputPlugin, rendering::PgiRenderingPlugin,
+    structures::PgiStructuresPlugin, webcam::PgiWebcamPlugin,
 };
 
 fn main() {
@@ -10,8 +10,10 @@ fn main() {
             DefaultPlugins,
             PgiInputPlugin,
             PgiRenderingPlugin,
-            PgiWebcamPlugin,
             PgiStructuresPlugin,
+            PgiWebcamPlugin,
+            // PgiDebugCameraView,
+            PgiAprilTagPlugin,
         ))
         .run();
 }
