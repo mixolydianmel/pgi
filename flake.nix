@@ -29,6 +29,12 @@
           udev
           libxkbcommon
           vulkan-loader
+          # opencv
+          libclang
+          # llvmPackages.libcxx
+          # libv4l
+          linuxHeaders
+          glibc
 
           cargo
           rustc
@@ -39,6 +45,17 @@
           lib.makeLibraryPath [
             libxkbcommon
             vulkan-loader
+            libclang
+            # llvmPackages.libcxx
+            # libv4l
+            # linuxHeaders
+          ];
+        CPATH =
+          with pkgs;
+          lib.makeIncludePath [
+            # libv4l
+            linuxHeaders
+            glibc
           ];
       };
     };
