@@ -1,3 +1,3 @@
 = Physicalized Game Interfaces
 
-For an overview of this project, see the ./documentation[documentation] folder, in particular the ./documentation/final-design-doc.pdf[Design Document]
+For an overview of this project, see the link:./documentation[documentation] folder, in particular the link:./documentation/final-design-doc.pdf[Design Document]
