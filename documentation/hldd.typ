@@ -2,11 +2,7 @@
 
 #set text(font:"DejaVu Sans")
 
-#show: checklist
-#show link: underline
-#show link: c => text(fill:blue)[#c]
-
-= Folk Computers as Game Interfaces
+= Physicalized Game Interfaces
 _Melody Henrich_
 
 == Overview
@@ -24,16 +20,6 @@ user-scriptable. While this project is folk computer inspired, it may not take
 the form of a full folk computer, but something that abides by the same
 principles nonetheless.
 
-
-#align(bottom+center,grid(
-  rows: (152pt, 152pt),
-  columns: (1fr, 1fr, 1fr),
-  gutter: 12pt,
-  grid.cell(colspan: 2, image("./images/2024-07-01_115942.png", width:100%)),
-  image("./images/folk-haip-setup.jpeg", width:100%),
-  image("./images/2024-07-01_115838.png", width:100%, height:100%),
-  grid.cell(colspan: 2, image("./images/2024-07-01_115951.png", width:100%)),
-))
 
 #pagebreak()
 
