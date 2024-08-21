@@ -1,4 +1,3 @@
-= Folk Computers as Game Interfaces
+= Physicalized Game Interfaces
 
-For an overview of this project, see the link:./documentation[documentation] folder,
-in particular the link:./documentation/hldd.pdf[Higher Level Design Document].
+For an overview of this project, see the ./documentation[documentation] folder, in particular the ./documentation/final-design-doc.pdf[Design Document]
