@@ -1,8 +1,5 @@
 {
-  "structures": [
-    {
-      "id": 0,
-      "shape": "square",
-    },
-  ],
+  "id": 0,
+  "shape": "SQUARE",
+  "color": "#ee2e2e"
 }
