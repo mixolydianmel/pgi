@@ -7,7 +7,7 @@ description = "A Physicalized Game Interface Display"
 [dependencies]
 apriltag = "0.4.0"
 apriltag-image = "0.1.0"
-bevy = { version = "0.14.0", features = ["wayland"] }
+bevy = { version = "0.15.0", features = ["wayland"] }
 clap = { version = "4.5.15", features = ["derive"] }
 image = "0.24.5"
 nokhwa = { version = "0.10.4", features = ["input-native", "output-threaded"] }

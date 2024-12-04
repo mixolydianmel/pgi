@@ -21,6 +21,7 @@
           clippy
           rustfmt
           rust-analyzer
+          sccache
         ];
         buildInputs = with pkgs; [
           pkg-config
@@ -57,6 +58,8 @@
             linuxHeaders
             glibc
           ];
+
+        RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
       };
     };
 }

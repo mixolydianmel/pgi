@@ -45,7 +45,7 @@ pub fn update_detections(
         .into_iter()
         .filter(|det| det.decision_margin() > 33.0)
         .for_each(|det| {
-            info!(
+            debug!(
                 "Detected tag ID {} with {} certainty",
                 det.id(),
                 det.decision_margin()
@@ -57,7 +57,7 @@ pub fn update_detections(
                 det.id(),
                 TagDetectionInfo {
                     transform: (x, y),
-                    last_update: time.elapsed_seconds(),
+                    last_update: time.elapsed_secs(),
                 },
             );
         });
@@ -66,5 +66,5 @@ pub fn update_detections(
 pub fn clean_detections(mut det_map: ResMut<TagDetectionList>, time: Res<Time>) {
     det_map
         .0
-        .retain(|_, value| time.elapsed_seconds() - value.last_update < DETECTION_TIMEOUT);
+        .retain(|_, value| time.elapsed_secs() - value.last_update < DETECTION_TIMEOUT);
 }

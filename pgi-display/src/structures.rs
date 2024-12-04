@@ -1,10 +1,4 @@
-use bevy::{
-    asset::Assets,
-    color::Color,
-    prelude::*,
-    sprite::{MaterialMesh2dBundle, Mesh2dHandle},
-    window::PrimaryWindow,
-};
+use bevy::{asset::Assets, color::Color, prelude::*, window::PrimaryWindow};
 
 use crate::apriltag::TagDetectionList;
 
@@ -14,7 +8,7 @@ pub struct Structure {
 }
 
 pub struct StructureDescriptor {
-    mesh: Mesh2dHandle,
+    mesh: Handle<Mesh>,
     color: Handle<ColorMaterial>,
     index: usize,
 }
@@ -38,31 +32,31 @@ pub fn load_structures(
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Rectangle::new(400.0, 400.0))),
+        mesh: meshes.add(Rectangle::new(400.0, 400.0)),
         color: materials.add(Color::linear_rgb(0.1, 0.9, 0.1)),
         index: 0,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Circle { radius: 400.0 })),
+        mesh: meshes.add(Circle { radius: 400.0 }),
         color: materials.add(Color::linear_rgb(0.9, 0.1, 0.1)),
         index: 1,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Annulus::new(200.0, 400.0))),
+        mesh: meshes.add(Annulus::new(200.0, 400.0)),
         color: materials.add(Color::linear_rgb(0.1, 0.1, 0.9)),
         index: 2,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Triangle2d::new(
+        mesh: meshes.add(Triangle2d::new(
             Vec2::new(-400.0, -400.0),
             Vec2::new(400.0, -400.0),
             Vec2::new(0.0, 400.0),
-        ))),
+        )),
         color: materials.add(Color::linear_rgb(0.9, 0.1, 0.9)),
         index: 3,
     });
     loaded_structures.0.push(StructureDescriptor {
-        mesh: Mesh2dHandle(meshes.add(Capsule2d::new(200.0, 400.0))),
+        mesh: meshes.add(Capsule2d::new(200.0, 400.0)),
         color: materials.add(Color::linear_rgb(0.1, 0.9, 0.9)),
         index: 4,
     });
@@ -71,13 +65,10 @@ pub fn load_structures(
 pub fn generate_meshes(mut commands: Commands, loaded_structures: Res<LoadedStructures>) {
     for structure in loaded_structures.0.iter() {
         commands.spawn((
-            MaterialMesh2dBundle {
-                mesh: structure.mesh.clone(),
-                material: structure.color.clone(),
-                transform: Transform::from_xyz(0.0, 0.0, 0.0),
-                visibility: Visibility::Hidden,
-                ..default()
-            },
+            Mesh2d(structure.mesh.clone()),
+            MeshMaterial2d(structure.color.clone()),
+            Transform::from_xyz(0.0, 0.0, 0.0),
+            Visibility::Hidden,
             Structure {
                 index: structure.index,
             },

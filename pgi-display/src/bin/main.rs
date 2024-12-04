@@ -1,19 +1,18 @@
 use bevy::prelude::*;
 use pgi_display::{
     apriltag::PgiAprilTagPlugin, input::PgiInputPlugin, rendering::PgiRenderingPlugin,
-    structures::PgiStructuresPlugin, webcam::PgiWebcamPlugin,
+    ui::PgiUiPlugin, webcam::PgiWebcamPlugin,
 };
 
 fn main() {
     App::new()
         .add_plugins((
             DefaultPlugins,
-            PgiInputPlugin,
             PgiRenderingPlugin,
-            PgiStructuresPlugin,
+            PgiInputPlugin,
             PgiWebcamPlugin,
-            // PgiDebugCameraView,
             PgiAprilTagPlugin,
+            PgiUiPlugin,
         ))
         .run();
 }

@@ -28,24 +28,21 @@ impl Plugin for PgiDebugCameraView {
     }
 }
 
-#[derive(Component)]
-pub struct MainCamera;
-
 pub fn setup_windows(mut windows: Query<&mut Window, With<PrimaryWindow>>) {
     for mut window in windows.iter_mut() {
-        window.mode = WindowMode::BorderlessFullscreen;
+        window.mode = WindowMode::BorderlessFullscreen(MonitorSelection::Primary);
     }
 }
 
 pub fn setup_camera(mut commands: Commands) {
-    commands.spawn((Camera2dBundle::default(), MainCamera));
+    commands.spawn((Camera2d, IsDefaultUiCamera));
 }
 
 #[derive(Resource, Default)]
 pub struct DebugCameraView(pub Handle<Image>);
 
 pub fn debug_setup_camview(
-    mut commands: Commands,
+    _commands: Commands,
     mut images: ResMut<Assets<Image>>,
     mut debug_camview: ResMut<DebugCameraView>,
     webcam: NonSend<nokhwa::Camera>,
@@ -65,16 +62,16 @@ pub fn debug_setup_camview(
 
     debug_camview.0 = images.add(bg_img);
 
-    commands.spawn(ImageBundle {
-        style: Style {
-            width: Val::Percent(100.0),
-            height: Val::Percent(100.0),
-            ..default()
-        },
-        image: debug_camview.0.clone().into(),
-        transform: Transform::from_xyz(0.0, 0.0, -100.0),
-        ..default()
-    });
+    // commands.spawn(ImageNode {
+    //     style: Style {
+    //         width: Val::Percent(100.0),
+    //         height: Val::Percent(100.0),
+    //         ..default()
+    //     },
+    //     image: debug_camview.0.clone().into(),
+    //     transform: Transform::from_xyz(0.0, 0.0, -100.0),
+    //     ..default()
+    // });
 }
 
 pub fn debug_update_camview(
