@@ -1,6 +1,14 @@
-use bevy::{asset::Assets, color::Color, prelude::*, window::PrimaryWindow};
-
 use crate::apriltag::TagDetectionList;
+use bevy::{
+    asset::Assets,
+    color::Color,
+    prelude::*,
+    reflect::TypePath,
+    sprite::{MaterialMesh2dBundle, Mesh2dHandle},
+    window::PrimaryWindow,
+};
+use bevy_common_assets::json::JsonAssetPlugin;
+use serde::Deserialize;
 
 #[derive(Component)]
 pub struct Structure {
@@ -13,23 +21,61 @@ pub struct StructureDescriptor {
     index: usize,
 }
 
+#[derive(Deserialize, Debug)]
+enum StructureShape {
+    SQUARE,
+    CIRCLE,
+}
+
+#[derive(Deserialize, Asset, TypePath, Debug)]
+pub struct StructureData {
+    id: u32,
+    shape: StructureShape,
+    color: String,
+}
+
+#[derive(Resource)]
+pub struct StructureDataHandle(Handle<StructureData>);
+
 #[derive(Resource, Default)]
 pub struct LoadedStructures(Vec<StructureDescriptor>);
+
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Default, Hash, States)]
+enum LoadState {
+    #[default]
+    Loading,
+    Done,
+}
 
 pub struct PgiStructuresPlugin;
 
 impl Plugin for PgiStructuresPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(LoadedStructures::default())
-            .add_systems(Startup, (load_structures, generate_meshes).chain())
-            .add_systems(Update, update_structures);
+            .add_plugins(JsonAssetPlugin::<StructureData>::new(&["structures.json"]))
+            .add_systems(Startup, load_structure_data)
+            .add_systems(
+                Update,
+                (
+                    parse_structures.run_if(in_state(LoadState::Loading)),
+                    update_structures.run_if(in_state(LoadState::Done)),
+                ),
+            )
+            .init_state::<LoadState>();
     }
 }
 
-pub fn load_structures(
-    mut loaded_structures: ResMut<LoadedStructures>,
+pub fn load_structure_data(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let handle = StructureDataHandle(asset_server.load("structures.json"));
+    commands.insert_resource(handle);
+}
+
+pub fn parse_structures(
+    mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
+    mut data_files: ResMut<Assets<StructureData>>,
+    data_handle: Res<StructureDataHandle>,
 ) {
     loaded_structures.0.push(StructureDescriptor {
         mesh: meshes.add(Rectangle::new(400.0, 400.0)),
