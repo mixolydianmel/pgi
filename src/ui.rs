@@ -112,7 +112,7 @@ pub fn update_elements(
             player_node.id, ss_x, ss_y,
         );
         (*node).left = Val::Percent(100.0 * (ss_x + 0.5));
-        (*node).top = Val::Percent(100.0 * (ss_y + 0.5));
+        (*node).top = Val::Percent(100.0 * (-ss_y + 0.5));
     }
 }
 
