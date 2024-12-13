@@ -8,23 +8,23 @@
 
 ## Design Pillars
 
-Usability
-: It should be easy to set up, calibrate, and use the interface for tabletop
+_**Usability**_ \
+It should be easy to set up, calibrate, and use the interface for tabletop
 gameplay. This maximizes the range of tabletop organizers that can make use of
 the interface.
 
-Compatibility
-: The interface should maintain its usefulness across multiple different
+_**Compatibility**_ \
+The interface should maintain its usefulness across multiple different
 tabletop games and scenarios. The type of game or the game scenario should have
 no effect on the usefulness of the interface.
 
-Flexibility
-: It should be easy to transport the interface and set it up in a wide variety
+_**Flexibility**_ \
+It should be easy to transport the interface and set it up in a wide variety
 of indoor locations. Game organizers should be location-flexible to meet the
 needs of their play group.
 
-Affordability
-: The interface should be as inexpensive as possible to acquire and use. The
+_**Affordability**_ \
+The interface should be as inexpensive as possible to acquire and use. The
 cheaper the interface, the more people can use it.
 
 ## Core Gameplay Loop
