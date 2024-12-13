@@ -1,6 +1,6 @@
 # Physicalized Game Interface
 
-> Bring the Virtual to Your Table Top
+_Bring the Virtual to Your Table Top_
 
 > [!CAUTION]
 > This project is in very early development. There are very few features
@@ -9,7 +9,7 @@
 
 ## What?
 
-Physicalize
+_**Physicalize**_ \
 : To give physical form or expression to
 
 A "Physicalized Game Interace" (PGI) is a game interface that lets the user
